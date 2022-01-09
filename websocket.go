@@ -21,7 +21,7 @@ type message struct {
 	Id        string
 	Text      string
 	Image     string
-	TimeStamp string
+	TimeStamp int
 	By        string
 }
 
