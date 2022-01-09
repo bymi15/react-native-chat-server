@@ -1,0 +1,1 @@
+web: react-native-chat-ws-server
