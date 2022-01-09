@@ -56,6 +56,7 @@ func handleWebsocket(w http.ResponseWriter, r *http.Request) {
 
 	rr.register(ws)
 
+mainLoop:
 	for {
 		mt, data, err := ws.ReadMessage()
 		l := log.WithFields(logrus.Fields{"mt": mt, "data": data, "err": err})
@@ -74,6 +75,9 @@ func handleWebsocket(w http.ResponseWriter, r *http.Request) {
 				break
 			}
 			rw.publish(data)
+		case -1:
+			l.Error("Connection lost!")
+			break mainLoop
 		default:
 			l.Warning("Unknown Message!")
 		}
